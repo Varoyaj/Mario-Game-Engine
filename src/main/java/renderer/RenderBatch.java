@@ -164,4 +164,8 @@ public class RenderBatch {
         elements[offsetArrayIndex + 5] = offset + 1;
     }
 
+    public boolean hasRoom(){
+        return this.hasRoom;
+    }
+
 }
