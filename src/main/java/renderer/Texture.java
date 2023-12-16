@@ -12,7 +12,8 @@ import static org.lwjgl.stb.STBImage.stbi_load;
 public class Texture {
     private String filepath;
     private int texID;
-    public Texture(String filepath){
+
+    public Texture(String filepath) {
         this.filepath = filepath;
 
         // Generate texture on GPU
@@ -33,30 +34,28 @@ public class Texture {
         IntBuffer channels = BufferUtils.createIntBuffer(1);
         ByteBuffer image = stbi_load(filepath, width, height, channels, 0);
 
-        if (image != null){
+        if (image != null) {
             if (channels.get(0) == 3) {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width.get(0), height.get(0),
                         0, GL_RGB, GL_UNSIGNED_BYTE, image);
             } else if (channels.get(0) == 4) {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(0), height.get(0),
                         0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+            } else {
+                assert false : "Error: (Texture) Unknown number of channesl '" + channels.get(0) + "'";
             }
-            else {;
-                assert false: "Error: (Texture) Could not load image '" + channels.get(0) + "'";
-            }
-        }
-        else {
-            assert false : "Error: (Texture) Could not load image'" + filepath + "'";
+        } else {
+            assert false : "Error: (Texture) Could not load image '" + filepath + "'";
         }
 
         stbi_image_free(image);
     }
 
-    public void bind(){
-        glBindTexture(GL_TEXTURE_2D, texID);;
+    public void bind() {
+        glBindTexture(GL_TEXTURE_2D, texID);
     }
 
-    public void unbind(){
+    public void unbind() {
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 }

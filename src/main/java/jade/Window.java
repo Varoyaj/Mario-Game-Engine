@@ -22,18 +22,18 @@ public class Window {
 
     private static Scene currentScene;
 
-    private Window(){
-        this.height = 1920;
-        this.width = 1080;
+    private Window() {
+        this.width = 1920;
+        this.height = 1080;
         this.title = "Mario";
-        r = 1;
-        b = 1;
-        g = 1;
+        r = 0;
+        b = 0;
+        g = 0;
         a = 1;
     }
 
-    public static void changeScene(int newScene){
-        switch (newScene){
+    public static void changeScene(int newScene) {
+        switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
                 currentScene.init();
@@ -49,19 +49,20 @@ public class Window {
                 break;
         }
     }
-    public static Window get(){
-        if (Window.window == null){
+
+    public static Window get() {
+        if (Window.window == null) {
             Window.window = new Window();
         }
 
         return Window.window;
     }
 
-    public static Scene getScene(){
+    public static Scene getScene() {
         return get().currentScene;
     }
 
-    public void run(){
+    public void run() {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
         init();
@@ -74,16 +75,17 @@ public class Window {
         // Terminate GLFW and the free the error callback
         glfwTerminate();
         glfwSetErrorCallback(null).free();
-
     }
-    public void init(){
+
+    public void init() {
         // Setup an error callback
         GLFWErrorCallback.createPrint(System.err).set();
 
         // Initialize GLFW
-        if(!glfwInit()){
+        if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize GLFW.");
         }
+
         // Configure GLFW
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -92,7 +94,7 @@ public class Window {
 
         // Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
-        if (glfwWindow == NULL){
+        if (glfwWindow == NULL) {
             throw new IllegalStateException("Failed to create the GLFW window.");
         }
 
@@ -115,15 +117,16 @@ public class Window {
         // creates the GLCapabilities instance and makes the OpenGL
         // bindings available for use.
         GL.createCapabilities();
+
         Window.changeScene(0);
     }
 
-    public void loop(){
+    public void loop() {
         float beginTime = Time.getTime();
-        float endTime = Time.getTime();
+        float endTime;
         float dt = -1.0f;
 
-        while (!glfwWindowShouldClose(glfwWindow)){
+        while (!glfwWindowShouldClose(glfwWindow)) {
             // Poll events
             glfwPollEvents();
 
@@ -140,7 +143,5 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
-
     }
-
 }
