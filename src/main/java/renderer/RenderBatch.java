@@ -110,19 +110,20 @@ public class RenderBatch implements Comparable<RenderBatch> {
     }
 
     public void render() {
-        boolean rebufferdata = false;
-        for (int i = 0; i < numSprites; i++){
+        boolean rebufferData = false;
+        for (int i=0; i < numSprites; i++) {
             SpriteRenderer spr = sprites[i];
-            if (spr.isDirty()){
+            if (spr.isDirty()) {
                 loadVertexProperties(i);
                 spr.setClean();
-                rebufferdata = true;
+                rebufferData = true;
             }
         }
-        if (rebufferdata) {
+        if (rebufferData) {
             glBindBuffer(GL_ARRAY_BUFFER, vboID);
             glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
         }
+
         // Use shader
         shader.use();
         shader.uploadMat4f("uProjection", Window.getScene().camera().getProjectionMatrix());
@@ -231,11 +232,11 @@ public class RenderBatch implements Comparable<RenderBatch> {
         return this.hasRoom;
     }
 
-    public boolean hasTextureRoom(){
+    public boolean hasTextureRoom() {
         return this.textures.size() < 8;
     }
 
-    public boolean hasTexture(Texture tex){
+    public boolean hasTexture(Texture tex) {
         return this.textures.contains(tex);
     }
 
@@ -245,6 +246,6 @@ public class RenderBatch implements Comparable<RenderBatch> {
 
     @Override
     public int compareTo(RenderBatch o) {
-        return Integer.compare(this.zIndex, o.zIndex);
+        return Integer.compare(this.zIndex, o.zIndex());
     }
 }

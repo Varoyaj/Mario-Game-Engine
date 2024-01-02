@@ -12,6 +12,4 @@ public class LevelScene extends Scene {
     public void update(float dt) {
 
     }
-
-
 }

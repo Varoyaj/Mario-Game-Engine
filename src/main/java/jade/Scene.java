@@ -46,17 +46,17 @@ public abstract class Scene {
         return this.camera;
     }
 
-    public void sceneImgui(){
-        if (activeGameObject != null){
+    public void sceneImgui() {
+        if (activeGameObject != null) {
             ImGui.begin("Inspector");
             activeGameObject.imgui();
             ImGui.end();
         }
 
-        imgiui();
+        imgui();
     }
 
-    public void imgiui(){
+    public void imgui() {
 
     }
 }

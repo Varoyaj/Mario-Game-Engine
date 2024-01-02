@@ -19,9 +19,9 @@ public class GameObject {
 
     public GameObject(String name, Transform transform, int zIndex) {
         this.name = name;
+        this.zIndex = zIndex;
         this.components = new ArrayList<>();
         this.transform = transform;
-        this.zIndex = zIndex;
     }
 
     public <T extends Component> T getComponent(Class<T> componentClass) {
@@ -66,13 +66,13 @@ public class GameObject {
         }
     }
 
-    public void imgui(){
-        for (Component c :components){
+    public void imgui() {
+        for (Component c : components) {
             c.imgui();
         }
     }
 
-    public int zIndex(){
+    public int zIndex() {
         return this.zIndex;
     }
 }

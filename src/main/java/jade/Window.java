@@ -142,10 +142,10 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (dt >= 0) {
-                System.out.println(dt);
-                currentScene.update(dt);
-            }
+//            if (dt >= 0) {
+//                System.out.println(dt);
+//                currentScene.update(dt);
+//            }
 
             this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);
