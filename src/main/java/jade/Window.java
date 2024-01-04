@@ -36,18 +36,18 @@ public class Window {
         switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
-                currentScene.init();
-                currentScene.start();
                 break;
             case 1:
                 currentScene = new LevelScene();
-                currentScene.init();
-                currentScene.start();
+
                 break;
             default:
                 assert false : "Unknown scene '" + newScene + "'";
                 break;
         }
+        currentScene.load();
+        currentScene.init();
+        currentScene.start();
     }
 
     public static Window get() {
@@ -142,10 +142,10 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-//            if (dt >= 0) {
+            if (dt >= 0) {
 //                System.out.println(dt);
-//                currentScene.update(dt);
-//            }
+                currentScene.update(dt);
+            }
 
             this.imGuiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);
@@ -154,6 +154,8 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
+
+        currentScene.saveExit();
     }
 
     public static int getWidth(){

@@ -2,6 +2,7 @@ package jade;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import components.Rigidbody;
 import components.Sprite;
 import components.SpriteRenderer;
 import components.Spritesheet;
@@ -28,6 +29,10 @@ public class LevelEditorScene extends Scene {
         loadResources();
 
         this.camera = new Camera(new Vector2f(-250, 0));
+        if (levelLoaded){
+            this.activeGameObject = gameObjects.get(0);
+            return;
+        }
 
         sprites = AssetPool.getSpritesheet("assets/images/spritesheet.png");
 
@@ -36,6 +41,7 @@ public class LevelEditorScene extends Scene {
         obj1Sprite = new SpriteRenderer();
         obj1Sprite.setColor(new Vector4f(1, 0, 0, 1));
         obj1.addComponent(obj1Sprite);
+        obj1.addComponent(new Rigidbody());
         this.addGameObjectToScene(obj1);
         this.activeGameObject = obj1;
 
@@ -50,6 +56,8 @@ public class LevelEditorScene extends Scene {
 
 //        Gson gson = new GsonBuilder()
 //                .setPrettyPrinting()
+//                .registerTypeAdapter(Component.class, new ComponentDeserializer())
+//                .registerTypeAdapter(GameObject.class, new GameObjectDeserializer())
 //                .create();
 //        String serialized = gson.toJson(obj1);
 //        System.out.println(serialized);
@@ -63,6 +71,7 @@ public class LevelEditorScene extends Scene {
         AssetPool.addSpritesheet("assets/images/spritesheet.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/spritesheet.png"),
                         16, 16, 26, 0));
+        AssetPool.getTexture("assets/images/blendImage2.png");
     }
 
     @Override
