@@ -18,7 +18,7 @@ public class Window {
     private int width, height;
     private String title;
     private long glfwWindow;
-    private ImGuiLayer imGuiLayer;
+    private ImGuiLayer imguiLayer;
     private Framebuffer framebuffer;
 
     public float r, g, b, a;
@@ -45,12 +45,12 @@ public class Window {
                 break;
             case 1:
                 currentScene = new LevelScene();
-
                 break;
             default:
                 assert false : "Unknown scene '" + newScene + "'";
                 break;
         }
+
         currentScene.load();
         currentScene.init();
         currentScene.start();
@@ -130,10 +130,11 @@ public class Window {
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-        this.imGuiLayer = new ImGuiLayer(glfwWindow);
-        this.imGuiLayer.initImGui();
+        this.imguiLayer = new ImGuiLayer(glfwWindow);
+        this.imguiLayer.initImGui();
 
         this.framebuffer = new Framebuffer(2560, 1440);
+        glViewport(0, 0, 2560, 1440);
 
         Window.changeScene(0);
     }
@@ -149,18 +150,17 @@ public class Window {
 
             DebugDraw.beginFrame();
 
+            this.framebuffer.bind();
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
-            //this.framebuffer.bind();
             if (dt >= 0) {
                 DebugDraw.draw();
                 currentScene.update(dt);
             }
-
             this.framebuffer.unbind();
 
-            this.imGuiLayer.update(dt, currentScene);
+            this.imguiLayer.update(dt, currentScene);
             glfwSwapBuffers(glfwWindow);
 
             endTime = (float)glfwGetTime();
@@ -171,17 +171,27 @@ public class Window {
         currentScene.saveExit();
     }
 
-    public static int getWidth(){
+    public static int getWidth() {
         return get().width;
     }
 
-    public static int getHeight(){
+    public static int getHeight() {
         return get().height;
     }
-    public static void setWidth(int newWidth){
+
+    public static void setWidth(int newWidth) {
         get().width = newWidth;
     }
-    public static void setHeight(int newHeight){
+
+    public static void setHeight(int newHeight) {
         get().height = newHeight;
+    }
+
+    public static Framebuffer getFramebuffer() {
+        return get().framebuffer;
+    }
+
+    public static float getTargetAspectRatio() {
+        return 16.0f / 9.0f;
     }
 }

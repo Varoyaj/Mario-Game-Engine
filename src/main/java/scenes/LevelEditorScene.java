@@ -78,19 +78,19 @@ public class LevelEditorScene extends Scene {
         }
     }
 
-    float x = 0.0f;
-    float y = 0.0f;
+//    float x = 0.0f;
+//    float y = 0.0f;
 
     @Override
     public void update(float dt) {
         levelEditorStuff.update(dt);
-        DebugDraw.addCircle2D(new Vector2f(x, y), 64, new Vector3f(1, 1, 0), 1);
-        DebugDraw.addCircle2D(new Vector2f(0.5f, 0.5f), 34, new Vector3f(5, 1, 0), 1);
-        DebugDraw.addCircle2D(new Vector2f(0.1f, 0.1f), 14, new Vector3f(0, 5, 0), 1);
-        DebugDraw.addCircle2D(new Vector2f(0.7f, 0.4f), 54, new Vector3f(0, 1, 1), 1);
+//        DebugDraw.addCircle2D(new Vector2f(x, y), 64, new Vector3f(1, 1, 0), 1);
+//        DebugDraw.addCircle2D(new Vector2f(0.5f, 0.5f), 34, new Vector3f(5, 1, 0), 1);
+//        DebugDraw.addCircle2D(new Vector2f(0.1f, 0.1f), 14, new Vector3f(0, 5, 0), 1);
+//        DebugDraw.addCircle2D(new Vector2f(0.7f, 0.4f), 54, new Vector3f(0, 1, 1), 1);
 
-        x += 50f * dt;
-        y += 50f * dt;
+//        x += 50f * dt;
+//        y += 50f * dt;
 
         for (GameObject go : this.gameObjects) {
             go.update(dt);
