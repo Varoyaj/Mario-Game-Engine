@@ -7,9 +7,9 @@
         "type": "components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 0.65168536,
-            "y": 0.4788698,
-            "z": 0.25384,
+            "x": 0.55243444,
+            "y": 0.45357165,
+            "z": 0.3248397,
             "w": 1.0
           },
           "sprite": {
@@ -679,9 +679,9 @@
         "type": "components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "x": 0.752809,
+            "y": 0.69515157,
+            "z": 0.23965828,
             "w": 1.0
           },
           "sprite": {
@@ -4711,9 +4711,9 @@
         "type": "components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "x": 0.07179928,
+            "y": 0.4690461,
+            "z": 0.66104865,
             "w": 1.0
           },
           "sprite": {
@@ -4991,9 +4991,9 @@
         "type": "components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "x": 0.58426964,
+            "y": 0.8764045,
+            "z": 0.8537988,
             "w": 1.0
           },
           "sprite": {
@@ -5143,6 +5143,62 @@
       "position": {
         "x": 544.0,
         "y": 320.0
+      },
+      "scale": {
+        "x": 32.0,
+        "y": 32.0
+      }
+    },
+    "zIndex": 0
+  },
+  {
+    "uid": 93,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 0.44788113,
+            "y": 0.6872659,
+            "z": 0.34363294,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 16.0,
+            "height": 16.0,
+            "texture": {
+              "filepath": "assets/images/spritesheets/decorationsAndBlocks.png",
+              "width": 112,
+              "height": 192
+            },
+            "texCoords": [
+              {
+                "x": 0.14285715,
+                "y": 0.5
+              },
+              {
+                "x": 0.14285715,
+                "y": 0.41666666
+              },
+              {
+                "x": 0.0,
+                "y": 0.41666666
+              },
+              {
+                "x": 0.0,
+                "y": 0.5
+              }
+            ]
+          },
+          "uid": 152
+        }
+      }
+    ],
+    "transform": {
+      "position": {
+        "x": 32.0,
+        "y": 544.0
       },
       "scale": {
         "x": 32.0,
