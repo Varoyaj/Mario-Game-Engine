@@ -5206,5 +5206,117 @@
       }
     },
     "zIndex": 0
+  },
+  {
+    "uid": 94,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 24.0,
+            "height": 48.0,
+            "texture": {
+              "filepath": "assets/images/gizmos.png",
+              "width": 72,
+              "height": 48
+            },
+            "texCoords": [
+              {
+                "x": 0.6666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.6666667,
+                "y": 0.0
+              },
+              {
+                "x": 0.33333334,
+                "y": 0.0
+              },
+              {
+                "x": 0.33333334,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 156
+        }
+      }
+    ],
+    "transform": {
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "scale": {
+        "x": 16.0,
+        "y": 48.0
+      }
+    },
+    "zIndex": 0
+  },
+  {
+    "uid": 95,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 24.0,
+            "height": 48.0,
+            "texture": {
+              "filepath": "assets/images/gizmos.png",
+              "width": 72,
+              "height": 48
+            },
+            "texCoords": [
+              {
+                "x": 0.6666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.6666667,
+                "y": 0.0
+              },
+              {
+                "x": 0.33333334,
+                "y": 0.0
+              },
+              {
+                "x": 0.33333334,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 157
+        }
+      }
+    ],
+    "transform": {
+      "position": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "scale": {
+        "x": 16.0,
+        "y": 48.0
+      }
+    },
+    "zIndex": 0
   }
 ]

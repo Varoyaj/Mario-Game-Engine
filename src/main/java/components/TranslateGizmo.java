@@ -1,0 +1,51 @@
+package components;
+
+import jade.GameObject;
+import jade.Prefabs;
+import jade.Window;
+import org.joml.Vector4f;
+
+public class TranslateGizmo extends Component{
+    private Vector4f xAxisColor = new Vector4f(1, 0, 0, 1);
+    private Vector4f xAxisColorHover = new Vector4f();
+    private Vector4f yAxisColor = new Vector4f(0, 1, 0, 1);
+    private Vector4f yAxisColorHover = new Vector4f();
+
+    private GameObject xAxisObject;
+    private GameObject yAxisObject;
+    private SpriteRenderer xAxisSprite;
+    private SpriteRenderer yAxisSprite;
+    private GameObject activeGameObject = null;
+
+    public TranslateGizmo(Sprite arrowSprite){
+        this.xAxisObject = Prefabs.generateSpriteObject(arrowSprite, 16, 48);
+        this.yAxisObject = Prefabs.generateSpriteObject(arrowSprite, 16, 48);
+        this.xAxisSprite = this.xAxisObject.getComponent(SpriteRenderer.class);
+        this.yAxisSprite = this.yAxisObject.getComponent(SpriteRenderer.class);
+
+        Window.getScene().addGameObjectToScene(this.xAxisObject);
+        Window.getScene().addGameObjectToScene(this.yAxisObject);
+    }
+
+    @Override
+    public void update(float dt){
+        if (this.activeGameObject != null){
+            this.xAxisObject.transform.position.set(this.activeGameObject.transform.position);
+            this.yAxisObject.transform.position.set(this.activeGameObject.transform.position);
+
+        }
+    }
+
+    private void setActive (GameObject object){
+        this.activeGameObject = object;
+        this.xAxisSprite.setColor(xAxisColor);
+        this.yAxisSprite.setColor(yAxisColor);
+    }
+
+    private void setInactive(){
+        this.activeGameObject = null;
+        this.xAxisSprite.setColor(new Vector4f(0, 0, 0, 0));
+        this.yAxisSprite.setColor(new Vector4f(0, 0, 0, 0));
+    }
+
+}
