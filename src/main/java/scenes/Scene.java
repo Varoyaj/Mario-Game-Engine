@@ -24,7 +24,6 @@ public abstract class Scene {
     protected Camera camera;
     private boolean isRunning = false;
     protected List<GameObject> gameObjects = new ArrayList<>();
-
     protected boolean levelLoaded = false;
 
     public Scene() {
@@ -67,23 +66,28 @@ public abstract class Scene {
         return this.camera;
     }
 
-
     public void imgui() {
 
     }
 
-    public void saveExit(){
+    public void saveExit() {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .registerTypeAdapter(Component.class, new ComponentDeserializer())
                 .registerTypeAdapter(GameObject.class, new GameObjectDeserializer())
                 .create();
+
         try {
             FileWriter writer = new FileWriter("level.txt");
-            writer.write(gson.toJson(this.gameObjects));
+            List<GameObject> objsToSerialize = new ArrayList<>();
+            for (GameObject obj : this.gameObjects) {
+                if (obj.doSerialization()) {
+                    objsToSerialize.add(obj);
+                }
+            }
+            writer.write(gson.toJson(objsToSerialize));
             writer.close();
-
-        } catch (IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
         }
     }
@@ -94,37 +98,35 @@ public abstract class Scene {
                 .registerTypeAdapter(Component.class, new ComponentDeserializer())
                 .registerTypeAdapter(GameObject.class, new GameObjectDeserializer())
                 .create();
-        String inFile= "";
-        try{
+
+        String inFile = "";
+        try {
             inFile = new String(Files.readAllBytes(Paths.get("level.txt")));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if (!inFile.equals("")){
+        if (!inFile.equals("")) {
             int maxGoId = -1;
-            int maxComId = -1;
+            int maxCompId = -1;
             GameObject[] objs = gson.fromJson(inFile, GameObject[].class);
-            for (int i = 0; i < objs.length; i++) {
+            for (int i=0; i < objs.length; i++) {
                 addGameObjectToScene(objs[i]);
 
-                for (Component c : objs[i].getAllComponents()){
-                    if (c.getUid() > maxComId){
-                      maxComId = c.getUid();
+                for (Component c : objs[i].getAllComponents()) {
+                    if (c.getUid() > maxCompId) {
+                        maxCompId = c.getUid();
                     }
                 }
                 if (objs[i].getUid() > maxGoId) {
                     maxGoId = objs[i].getUid();
                 }
             }
-            this.levelLoaded = true;
 
             maxGoId++;
-            maxComId++;
-            System.out.println(maxGoId);
-            System.out.println(maxComId);
+            maxCompId++;
             GameObject.init(maxGoId);
-            Component.init(maxComId);
+            Component.init(maxCompId);
             this.levelLoaded = true;
         }
     }

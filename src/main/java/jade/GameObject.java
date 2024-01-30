@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameObject {
-
     private static int ID_COUNTER = 0;
     private int uid = -1;
 
@@ -14,7 +13,7 @@ public class GameObject {
     private List<Component> components;
     public Transform transform;
     private int zIndex;
-
+    private boolean doSerialization = true;
 
     public GameObject(String name, Transform transform, int zIndex) {
         this.name = name;
@@ -22,7 +21,7 @@ public class GameObject {
         this.components = new ArrayList<>();
         this.transform = transform;
 
-        this.uid = ID_COUNTER ++;
+        this.uid = ID_COUNTER++;
     }
 
     public <T extends Component> T getComponent(Class<T> componentClass) {
@@ -74,15 +73,15 @@ public class GameObject {
         }
     }
 
-    public int zIndex() {
-        return this.zIndex;
-    }
+    public int zIndex() {return this.zIndex;}
 
     public static void init(int maxId) {ID_COUNTER = maxId;}
 
     public int getUid() {return this.uid;}
 
-    public List<Component> getAllComponents(){
-        return this.components;
-    }
+    public List<Component> getAllComponents() {return this.components;}
+
+    public void setNoSerialize() {this.doSerialization = false;}
+
+    public boolean doSerialization() {return this.doSerialization;}
 }
