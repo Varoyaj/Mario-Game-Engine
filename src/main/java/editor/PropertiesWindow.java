@@ -12,7 +12,7 @@ public class PropertiesWindow {
     private GameObject activeGameObject = null;
     private PickingTexture pickingTexture;
 
-    private float debounce = 0.5f;
+    private float debounce = 0.2f;
 
     public PropertiesWindow(PickingTexture pickingTexture) {
         this.pickingTexture = pickingTexture;
@@ -26,7 +26,7 @@ public class PropertiesWindow {
             int y = (int)MouseListener.getScreenY();
             int gameObjectId = pickingTexture.readPixel(x, y);
             activeGameObject = currentScene.getGameObject(gameObjectId);
-            this.debounce = 0.5f;
+            this.debounce = 0.2f;
         }
     }
 
