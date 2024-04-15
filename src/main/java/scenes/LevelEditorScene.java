@@ -5,20 +5,15 @@ import imgui.ImGui;
 import imgui.ImVec2;
 import jade.*;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
-import org.lwjgl.system.CallbackI;
-import renderer.DebugDraw;
-import scenes.Scene;
+
 import util.AssetPool;
 
 public class LevelEditorScene extends Scene {
 
-    private GameObject obj1;
     private Spritesheet sprites;
-    SpriteRenderer obj1Sprite;
 
     GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0);
+
 
     public LevelEditorScene() {
 
@@ -34,30 +29,31 @@ public class LevelEditorScene extends Scene {
         levelEditorStuff.addComponent(new MouseControls());
         levelEditorStuff.addComponent(new GridLines());
         levelEditorStuff.addComponent(new EditorCamera(this.camera));
-        levelEditorStuff.addComponent(new TranslateGizmo(gizmos.getSprite(1),
-                Window.getImguiLayer().getPropertiesWindow()));
+        levelEditorStuff.addComponent(new GizmoSystem(gizmos));
 
         levelEditorStuff.start();
 
-
-
-//        obj1 = new GameObject("Object 1", new Transform(new Vector2f(200, 100),
-//                new Vector2f(256, 256)), 2);
-//        obj1Sprite = new SpriteRenderer();
-//        obj1Sprite.setColor(new Vector4f(1, 0, 0, 1));
-//        obj1.addComponent(obj1Sprite);
-//        obj1.addComponent(new Rigidbody());
-//        this.addGameObjectToScene(obj1);
-//        this.activeGameObject = obj1;
+//        obj1 = new Transform(new Vector2f(100, 500));
+//        obj2 = new Transform(new Vector2f(100, 300));
 //
-//        GameObject obj2 = new GameObject("Object 2",
-//                new Transform(new Vector2f(400, 100), new Vector2f(256, 256)), 3);
-//        SpriteRenderer obj2SpriteRenderer = new SpriteRenderer();
-//        Sprite obj2Sprite = new Sprite();
-//        obj2Sprite.setTexture(AssetPool.getTexture("assets/images/blendImage2.png"));
-//        obj2SpriteRenderer.setSprite(obj2Sprite);
-//        obj2.addComponent(obj2SpriteRenderer);
-//        this.addGameObjectToScene(obj2);
+//        rb1 = new Rigidbody2D();
+//        rb2 = new Rigidbody2D();
+//        rb1.setRawTransform(obj1);
+//        rb2.setRawTransform(obj2);
+//        rb1.setMass(100.0f);
+//        rb2.setMass(200.0f);
+//
+//        Circle c1 = new Circle();
+//        c1.setRadius(10.0f);
+//        c1.setRigidbody(rb1);
+//        Circle c2 = new Circle();
+//        c2.setRadius(20.0f);
+//        c2.setRigidbody(rb2);
+//        rb1.setCollider(c1);
+//        rb2.setCollider(c2);
+//
+//        physics.addRigidbody(rb1, true);
+//        physics.addRigidbody(rb2, false);
     }
 
     private void loadResources() {
@@ -68,43 +64,35 @@ public class LevelEditorScene extends Scene {
                         16, 16, 81, 0));
         AssetPool.addSpritesheet("assets/images/gizmos.png",
                 new Spritesheet(AssetPool.getTexture("assets/images/gizmos.png"),
-                        24, 48, 2, 0));
+                        24, 48, 3, 0));
         AssetPool.getTexture("assets/images/blendImage2.png");
 
-        for (GameObject g : gameObjects){
-            if (g.getComponent(SpriteRenderer.class) != null){
+        for (GameObject g : gameObjects) {
+            if (g.getComponent(SpriteRenderer.class) != null) {
                 SpriteRenderer spr = g.getComponent(SpriteRenderer.class);
-                if (spr.getTexture() != null){
+                if (spr.getTexture() != null) {
                     spr.setTexture(AssetPool.getTexture(spr.getTexture().getFilepath()));
                 }
             }
         }
     }
 
-//    float x = 0.0f;
-//    float y = 0.0f;
-
     @Override
     public void update(float dt) {
         levelEditorStuff.update(dt);
         this.camera.adjustProjection();
-//        DebugDraw.addCircle2D(new Vector2f(x, y), 64, new Vector3f(1, 1, 0), 1);
-//        DebugDraw.addCircle2D(new Vector2f(0.5f, 0.5f), 34, new Vector3f(5, 1, 0), 1);
-//        DebugDraw.addCircle2D(new Vector2f(0.1f, 0.1f), 14, new Vector3f(0, 5, 0), 1);
-//        DebugDraw.addCircle2D(new Vector2f(0.7f, 0.4f), 54, new Vector3f(0, 1, 1), 1);
-
-//        x += 50f * dt;
-//        y += 50f * dt;
 
         for (GameObject go : this.gameObjects) {
             go.update(dt);
         }
 
-        this.renderer.render();
+//        DebugDraw.addCircle(obj1.position, 10.0f, new Vector3f(1, 0, 0));
+//        DebugDraw.addCircle(obj2.position, 20.0f, new Vector3f(0.2f, 0.8f, 0.1f));
+//        physics.update(dt);
     }
 
     @Override
-    public void render(){
+    public void render() {
         this.renderer.render();
     }
 
